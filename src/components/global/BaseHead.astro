@@ -1,0 +1,98 @@
+---
+// assets
+import { Font } from "astro:assets";
+
+// components
+import Seo, { type Props as SEOProps } from "../../components/global/Seo.astro";
+
+// Site-wide defaults (edit these once for your whole site) 
+const SITE_NAME    = "Harish Raja R | AI/ML Engineer & Full-Stack Developer";
+const TITLE_TMPL   = "%s | Harish Raja R";
+const DEFAULT_OG   = "/og-image.png";   // place in /public/images/
+const TWITTER_SITE = "@HarishRajaR";
+const THEME_COLOR  = "#0d0d0d";
+const LOCALE       = "en_US";
+
+// Layout accepts all SEO props + standard layout props
+export interface Props extends SEOProps {
+  /** Extra <head> content injected after SEO tags (optional). */
+  headSlot?: boolean;
+}
+
+const {
+  // Required SEO props (pages must supply these two)
+  title,
+  description,
+  // SEO props with site-wide fallbacks
+  titleTemplate  = TITLE_TMPL,
+  siteName       = SITE_NAME,
+  ogImage        = DEFAULT_OG,
+  twitterSite    = TWITTER_SITE,
+  themeColor     = THEME_COLOR,
+  locale         = LOCALE,
+  // Pass all remaining SEO props through unchanged
+  ...seoProps
+} = Astro.props;
+
+
+---
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+	<link rel="sitemap" href="/sitemap-index.xml" />
+	<Font cssVariable="--font-grunge" />
+	<Font cssVariable="--font-mono" />
+	<meta name="generator" content={Astro.generator} />
+	<Seo
+      title={title}
+      description={description}
+      titleTemplate={titleTemplate}
+      siteName={siteName}
+      ogImage={ogImage}
+      twitterSite={twitterSite}
+      themeColor={themeColor}
+      locale={locale}
+      {...seoProps}
+    />
+	<!-- JSON-LD Schema Markup for Harish Raja R -->
+	<script type="application/ld+json" set:html={JSON.stringify({
+		"@context": "https://schema.org",
+		"@type": "Person",
+		"name": "Harish Raja R",
+		"jobTitle": "AI/ML Engineer & Full-Stack Developer",
+		"description": "Integrated M.Sc. Artificial Intelligence & Machine Learning student at Coimbatore Institute of Technology. Building AI systems, full-stack products, and cybersecurity intelligence.",
+		"email": "mailto:harishatgithub@gmail.com",
+		"telephone": "+916369714360",
+		"address": {
+			"@type": "PostalAddress",
+			"addressLocality": "Coimbatore",
+			"addressRegion": "Tamil Nadu",
+			"addressCountry": "India"
+		},
+		"sameAs": [
+			"https://github.com/Harish-Raja-R",
+			"https://linkedin.com/in/harish-raja-r"
+		],
+		"affiliation": {
+			"@type": "EducationalOrganization",
+			"name": "Coimbatore Institute of Technology",
+			"location": "Coimbatore, Tamil Nadu, India"
+		},
+		"knowsAbout": [
+			"Artificial Intelligence",
+			"Machine Learning",
+			"Deep Learning",
+			"Graph Machine Learning",
+			"Computer Vision Super-Resolution",
+			"Cybersecurity Threat Intelligence",
+			"Full-Stack Web Engineering",
+			"PyTorch",
+			"React",
+			"FastAPI",
+			"Node.js",
+			"Docker"
+		]
+	})} />
+</head>
+

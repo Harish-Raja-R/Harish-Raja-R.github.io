@@ -1,0 +1,61 @@
+---
+// components
+import Text from "../elements/Text.astro";
+
+// props
+const { title, place, period, text } = Astro.props;
+---
+
+<div class="flex flex-col gap-2 dropdown">
+    <button 
+        type="button" 
+        class="flex flex-col w-full text-left cursor-pointer dropdown-trigger py-1 focus:outline-none focus:ring-1 focus:ring-base-900" 
+        aria-expanded="false"
+    >
+        <div class="flex justify-between items-center w-full">
+            <Text variant={'xl'} class="text-base-900 hover:text-base-700 font-semibold">{title}</Text>
+            <svg 
+              class="dropdown-icon transition-transform duration-200 shrink-0 ml-4" 
+              xmlns="http://www.w3.org/2000/svg" 
+              width="20" 
+              height="20" 
+              viewBox="0 0 8 8"
+              aria-hidden="true">
+                <path fill="currentColor" class="text-base-900" d="M1.5 1L0 2.5l4 4l4-4L6.5 1L4 3.5L1.5 1z"/>
+            </svg>  
+        </div>
+        <Text variant={'md'}>{place}</Text>
+        <Text variant={'sm'} class="text-base-700">{period}</Text>
+    </button>
+    <div class="dropdown-content hidden overflow-hidden transition-all duration-200 pt-2 pb-2">
+        <Text variant={'sm'} class="text-base-900">{text}</Text>
+    </div>
+</div>
+
+<script>
+  const initResumeDropdowns = () => {
+    const dropdowns = document.querySelectorAll('.dropdown');
+    
+    dropdowns.forEach(dropdown => {
+      const trigger = dropdown.querySelector('.dropdown-trigger') as HTMLButtonElement | null;
+      const content = dropdown.querySelector('.dropdown-content') as HTMLElement | null;
+      const icon = dropdown.querySelector('.dropdown-icon') as SVGElement | null;
+      
+      if (trigger && content && !trigger.hasAttribute('data-initialized')) {
+        trigger.setAttribute('data-initialized', 'true');
+        trigger.addEventListener('click', () => {
+          const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
+          trigger.setAttribute('aria-expanded', String(!isExpanded));
+          content.classList.toggle('hidden');
+          icon?.classList.toggle('rotate-180');
+        });
+      }
+    });
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initResumeDropdowns);
+  } else {
+    initResumeDropdowns();
+  }
+</script>

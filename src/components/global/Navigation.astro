@@ -1,0 +1,160 @@
+---
+// components
+import Link from "../elements/Link.astro";
+
+// links
+const navLinks = [
+    { number: "01", title: "HOME", href: "/" },
+    { number: "02", title: "WORK", href: "/works" },
+    { number: "03", title: "ABOUT", href: "/about" },
+    { number: "04", title: "EXPERIENCE", href: "/experience" },
+    { number: "05", title: "CONTACT", href: "/contact" }
+];
+
+const currentPath = Astro.url.pathname;
+const isActive = (href: string) => {
+    if (href === "/" && currentPath === "/") return true;
+    if (href !== "/" && currentPath.startsWith(href)) return true;
+    return false;
+};
+---
+
+<nav class="flex justify-between items-center py-6 px-6 md:px-12 fixed top-0 right-0 left-0 z-50 bg-base-100/80 backdrop-blur-md border-b border-base-900/20">
+    <!-- Brand Tag -->
+    <a href="/" class="group flex items-center gap-3">
+        <span class="inline-block w-2.5 h-2.5 bg-base-900 group-hover:scale-125 transition-transform duration-200"></span>
+        <span class="font-mono text-12 md:text-16 tracking-widest text-base-900 uppercase font-bold group-hover:text-base-700 transition-colors">
+            HARISH RAJA R <span class="text-base-600 hidden sm:inline">// CIT AI&ML</span>
+        </span>
+    </a>
+
+    <!-- Desktop Nav -->
+    <ul class="hidden md:flex items-center gap-7">
+        {
+            navLinks.map((link) => {
+                const active = isActive(link.href);
+                return (
+                    <li>
+                        <a 
+                            href={link.href} 
+                            class:list={[
+                                "font-grunge text-20 lg:text-24 tracking-wider uppercase transition-all duration-200 flex items-center gap-1 px-1 py-0.5",
+                                active 
+                                    ? "text-base-900 border-b-2 border-base-900" 
+                                    : "text-base-600 hover:text-base-900 hover:border-b-2 hover:border-base-700"
+                            ]}
+                            aria-current={active ? "page" : undefined}
+                        >
+                            <span class="font-mono text-12 text-base-500">{link.number}</span>
+                            <span>{link.title}</span>
+                        </a>
+                    </li>
+                );
+            })
+        }
+    </ul>
+
+    <!-- Mobile Nav Toggle -->
+    <div class="md:hidden">
+        <button 
+            id="open-nav" 
+            aria-label="Open Navigation" 
+            class="p-2 border border-base-900/40 hover:border-base-900 text-base-900 transition-colors cursor-pointer"
+        >
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter">
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+        </button>
+
+        <!-- Mobile Drawer -->
+        <div class="hidden fixed inset-0 bg-base-100/95 backdrop-blur-xl z-50 p-6 flex flex-col justify-between" id="mobile-nav" role="dialog" aria-modal="true" aria-label="Mobile Navigation Menu">
+            <div class="flex justify-between items-center border-b border-base-900/20 pb-4">
+                <div class="font-mono text-12 text-base-500 uppercase tracking-widest">
+                    SYSTEM_NAV // HARISH RAJA R
+                </div>
+                <button 
+                    id="close-nav" 
+                    aria-label="Close Navigation" 
+                    class="p-2 border border-base-900 text-base-900 hover:bg-base-900 hover:text-base-100 transition-colors cursor-pointer"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+
+            <ul class="flex flex-col gap-6 my-auto text-left">
+                {
+                    navLinks.map((link) => {
+                        const active = isActive(link.href);
+                        return (
+                            <li class="border-b border-base-900/10 pb-3">
+                                <a 
+                                    href={link.href} 
+                                    class:list={[
+                                        "font-grunge text-48 tracking-wider uppercase transition-colors block",
+                                        active ? "text-base-900 translate-x-2" : "text-base-600 hover:text-base-900"
+                                    ]}
+                                    aria-current={active ? "page" : undefined}
+                                >
+                                    <span class="font-mono text-16 text-base-500 mr-2">{link.number}.</span>
+                                    {link.title}
+                                </a>
+                            </li>
+                        );
+                    })
+                }
+            </ul>
+
+            <div class="pt-6 border-t border-base-900/20 flex flex-col gap-2 font-mono text-12 text-base-600">
+                <p class="text-base-900 font-semibold">COIMBATORE, TAMIL NADU, INDIA</p>
+                <div class="flex gap-4">
+                    <a href="https://github.com/Harish-Raja-R" target="_blank" rel="noopener noreferrer" class="hover:text-base-900 underline">GitHub</a>
+                    <a href="https://linkedin.com/in/harish-raja-r" target="_blank" rel="noopener noreferrer" class="hover:text-base-900 underline">LinkedIn</a>
+                    <a href="mailto:harishatgithub@gmail.com" class="hover:text-base-900 underline">Email</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<script>
+    const initNav = () => {
+        const mobileNav = document.querySelector('#mobile-nav') as HTMLDivElement | null;
+        const openBtn = document.querySelector('#open-nav') as HTMLButtonElement | null;
+        const closeBtn = document.querySelector('#close-nav') as HTMLButtonElement | null;
+
+        if (openBtn && mobileNav && closeBtn && !openBtn.hasAttribute('data-initialized')) {
+            openBtn.setAttribute('data-initialized', 'true');
+            openBtn.addEventListener("click", () => {
+                mobileNav.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+                closeBtn.focus();
+            });
+
+            const closeMenu = () => {
+                mobileNav.classList.add('hidden');
+                document.body.style.overflow = '';
+                openBtn.focus();
+            };
+
+            closeBtn.addEventListener("click", closeMenu);
+
+            // Close on escape key
+            window.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && !mobileNav.classList.contains('hidden')) {
+                    closeMenu();
+                }
+            });
+        }
+    };
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initNav);
+    } else {
+        initNav();
+    }
+</script>

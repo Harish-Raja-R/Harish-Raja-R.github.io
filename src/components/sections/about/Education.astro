@@ -1,0 +1,40 @@
+---
+// components
+import Container from "../../elements/Container.astro";
+import Heading from "../../elements/Heading.astro";
+import ResumeDropdown from "../../elements/ResumeDropdown.astro";
+import ContainerBottom from "../../elements/ContainerBottom.astro";
+
+// content
+const education = [
+    { 
+        title: "Integrated M.Sc. in Artificial Intelligence & Machine Learning",
+        place: "Coimbatore Institute of Technology (CIT)",
+        period: "2024 – 2029 (Expected)",
+        text: "Five-year rigorous integrated master's curriculum combining advanced mathematics, machine learning theory, computer vision, natural language processing, and scalable distributed systems. Current Cumulative GPA: 9.32 / 10.0."
+    },
+    { 
+        title: "Higher Secondary & Pre-Engineering Specialization",
+        place: "Tamil Nadu State Board",
+        period: "Completed with Distinction",
+        text: "Focused on Mathematics, Physics, Chemistry, and Computer Science with deep foundations in calculus, linear algebra, and algorithmic problem-solving."
+    }
+];
+---
+
+<Container variant={'md'} id="education" class="scroll-mt-32">
+    <div class="text-center mb-6">
+        <span class="font-mono text-12 text-base-600 uppercase tracking-widest block mb-2">ACADEMICS // COIMBATORE INSTITUTE OF TECHNOLOGY</span>
+        <Heading tagName="h2" tagSize="h2" class="text-center">EDUCATION</Heading>
+    </div>
+    <div class="flex flex-col gap-4">
+        <Container class="flex flex-col gap-4 p-6 border-3 border-base-900 bg-base-100/40">
+            {
+                education.map((i) => (
+                    <ResumeDropdown title={i.title} place={i.place} period={i.period} text={i.text} />
+                ))
+            }
+        </Container>
+        <ContainerBottom /> 
+    </div>
+</Container>

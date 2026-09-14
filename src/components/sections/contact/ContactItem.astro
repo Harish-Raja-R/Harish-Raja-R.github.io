@@ -1,0 +1,62 @@
+---
+// assets
+import { Image } from "astro:assets";
+import symbol from "../../../assets/ui/symbolWhite.svg";
+
+// components
+import Text from "../../elements/Text.astro";
+
+// props
+interface Props {
+    title: string;
+    contact: string;
+    href?: string;
+    subtext?: string;
+}
+
+const { title, contact, href, subtext } = Astro.props;
+---
+
+<div class="border-2 border-base-900 bg-base-100/60 p-5 flex flex-col justify-between gap-4 w-full hover:border-base-700 transition-colors group">
+    <div class="flex justify-between items-center">
+        <Text variant={'lg'} class="text-base-900">{title}</Text>
+        <Image src={symbol} alt="UI Symbol" width={24} height={24} />
+    </div>
+
+    <div class="h-px w-full border-b border-base-900/30"></div>
+
+    <div class="flex flex-col gap-1">
+        {href ? (
+            <a 
+                href={href} 
+                target={href.startsWith("http") ? "_blank" : undefined}
+                rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
+                class="font-mono text-16 text-base-900 hover:text-base-700 hover:underline font-semibold break-all"
+            >
+                {contact}
+            </a>
+        ) : (
+            <span class="font-mono text-16 text-base-900 font-semibold break-all">
+                {contact}
+            </span>
+        )}
+        {subtext && (
+            <span class="font-mono text-12 text-base-600">
+                {subtext}
+            </span>
+        )}
+    </div>
+
+    {href && (
+        <div class="pt-2 border-t border-base-900/10 flex justify-end">
+            <a 
+                href={href} 
+                target={href.startsWith("http") ? "_blank" : undefined}
+                rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
+                class="font-mono text-11 text-base-500 group-hover:text-base-900 uppercase tracking-widest flex items-center gap-1"
+            >
+                CONNECT &rarr;
+            </a>
+        </div>
+    )}
+</div>

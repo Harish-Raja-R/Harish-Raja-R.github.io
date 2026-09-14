@@ -1,0 +1,177 @@
+---
+// assets
+import { Image } from "astro:assets";
+import symbol from "../../assets/ui/symbol.svg";
+import vinylT from "../../assets/work-card/vinyltexture.jpg";
+import vinylD from "../../assets/work-card/vinyldisk.png";
+import { getImage } from "astro:assets";
+const vinylTexture = await getImage({src: vinylT, format:"jpg"});
+const vinylDisk = await getImage({src: vinylD, format:"png"});
+
+// components
+import Text from "../elements/Text.astro";
+import Heading from "../elements/Heading.astro";
+
+// props
+interface Props {
+    slug: string;
+    featuredImage: any;
+    title: string;
+    client: string;
+    category: string;
+    subtitle?: string;
+    technologies?: string[];
+    metrics?: string[];
+    githubUrl?: string;
+    liveSite?: string;
+    description?: string;
+}
+
+const { 
+    slug, 
+    featuredImage, 
+    title, 
+    client, 
+    category, 
+    subtitle, 
+    technologies = [], 
+    metrics = [],
+    githubUrl,
+    liveSite = `/works/${slug}`,
+    description 
+} = Astro.props;
+---
+
+<div class="group flex flex-col justify-between border-2 border-base-900/40 hover:border-base-900 bg-base-100/60 p-5 md:p-6 transition-all duration-300 relative overflow-hidden">
+    <!-- Top Meta Row -->
+    <div class="flex justify-between items-center mb-4 border-b border-base-900/20 pb-2">
+        <span class="inline-block border border-base-900 bg-base-900 text-base-100 font-mono text-12 font-bold px-2.5 py-0.5 uppercase tracking-wider">
+            {category}
+        </span>
+        <span class="font-mono text-12 text-base-600 uppercase">
+            {client}
+        </span>
+    </div>
+
+    <!-- Vinyl Image Showcase -->
+    <div class="relative w-full aspect-square max-w-[340px] mx-auto my-2 overflow-visible">
+        <a href={`/works/${slug}`} class="block w-full h-full relative z-20 focus:outline-none" aria-label={`View details for ${title}`}>
+            <!-- Dark Grunge Texture Overlay -->
+            <div style={`background-image: url(${vinylTexture.src})`} class="absolute inset-0 bg-cover opacity-35 z-30 pointer-events-none border border-base-900/30"></div>
+            
+            <!-- Featured Image -->
+            <Image 
+                src={featuredImage} 
+                alt={title} 
+                class="relative w-full h-full object-cover z-20 border-2 border-base-900 shadow-xl group-hover:contrast-110 transition-all duration-300" 
+                loading="lazy" 
+                width={400}
+                height={400}
+            />
+
+            <!-- Spinning Vinyl Record -->
+            <div 
+                style={`background-image: url(${vinylDisk.src})`} 
+                class="absolute top-0 -right-6 md:-right-10 bg-cover z-10 w-full h-full transition-all duration-500 ease-out group-hover:-right-16 md:group-hover:-right-24 animate-spin opacity-85 group-hover:opacity-100 pointer-events-none"
+            ></div>
+        </a>
+    </div>
+
+    <!-- Content Block -->
+    <div class="flex flex-col gap-2 mt-4 pt-4 border-t border-base-900/20">
+        <a href={`/works/${slug}`} class="hover:text-base-700 transition-colors">
+            <Heading tagName="h3" tagSize="h4" class="group-hover:underline tracking-tight">
+                {title}
+            </Heading>
+        </a>
+
+        {subtitle && (
+            <p class="font-mono text-14 text-base-800 font-semibold leading-snug">
+                {subtitle}
+            </p>
+        )}
+
+        {description && (
+            <p class="font-mono text-12 text-base-600 line-clamp-2 leading-relaxed">
+                {description}
+            </p>
+        )}
+
+        <!-- Metrics Callout -->
+        {metrics.length > 0 && (
+            <div class="flex flex-wrap gap-2 my-1">
+                {metrics.slice(0, 2).map((metric) => (
+                    <span class="inline-flex items-center gap-1 font-mono text-11 text-emerald-300 bg-emerald-950/40 border border-emerald-800/40 px-2 py-0.5">
+                        <span class="w-1 h-1 bg-emerald-400"></span>
+                        {metric}
+                    </span>
+                ))}
+            </div>
+        )}
+
+        <!-- Technology Badges -->
+        {technologies.length > 0 && (
+            <div class="flex flex-wrap gap-1.5 pt-2">
+                {technologies.map((tech) => (
+                    <span class="font-mono text-11 text-base-700 bg-base-200/50 border border-base-900/20 px-2 py-0.5">
+                        {tech}
+                    </span>
+                ))}
+            </div>
+        )}
+
+        <!-- Action Links -->
+        <div class="flex flex-wrap items-center justify-between gap-2 pt-4 mt-2 border-t border-base-900/20">
+            <div class="flex items-center gap-2">
+                <a 
+                    href={`/works/${slug}`}
+                    class="font-grunge text-18 md:text-20 text-base-900 hover:text-base-600 hover:underline uppercase tracking-wide flex items-center gap-1"
+                >
+                    CASE STUDY &rarr;
+                </a>
+                <button 
+                    type="button"
+                    class="quick-view-btn font-mono text-11 px-2 py-1 border border-base-900/40 hover:border-base-900 hover:bg-base-900/10 text-base-800 uppercase tracking-wider cursor-pointer transition-colors"
+                    data-title={title}
+                    data-subtitle={subtitle || ""}
+                    data-category={category}
+                    data-client={client}
+                    data-description={description || ""}
+                    data-slug={slug}
+                    data-github={githubUrl || ""}
+                    data-live={liveSite || ""}
+                    data-tech={JSON.stringify(technologies)}
+                    data-metrics={JSON.stringify(metrics)}
+                    aria-label={`Quick view modal for ${title}`}
+                >
+                    PREVIEW
+                </button>
+            </div>
+
+            <div class="flex items-center gap-2">
+                {githubUrl && (
+                    <a 
+                        href={githubUrl} 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        class="p-1.5 border border-base-900/60 hover:bg-base-900 hover:text-base-100 text-base-900 font-mono text-11 uppercase transition-colors"
+                        aria-label={`GitHub repo for ${title}`}
+                    >
+                        GITHUB
+                    </a>
+                )}
+                {liveSite && liveSite !== githubUrl && !liveSite.includes("github.com") && (
+                    <a 
+                        href={liveSite} 
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="p-1.5 border border-base-900/60 hover:bg-base-900 hover:text-base-100 text-base-900 font-mono text-11 uppercase transition-colors"
+                        aria-label={`Live demo for ${title}`}
+                    >
+                        LIVE DEMO
+                    </a>
+                )}
+            </div>
+        </div>
+    </div>
+</div>

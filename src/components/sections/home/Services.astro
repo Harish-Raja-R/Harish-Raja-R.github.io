@@ -1,0 +1,44 @@
+---
+// components
+import Container from "../../elements/Container.astro";
+import Heading from "../../elements/Heading.astro";
+import Dropdown from "../../elements/Dropdown.astro";
+import ContainerBottom from "../../elements/ContainerBottom.astro";
+
+// content
+const engineeringCapabilities = [
+    { 
+        title: "Artificial Intelligence & Machine Learning",
+        text: "Designing and training deep learning architectures, graph neural networks (GNNs), multimodal transformer models, and computer vision super-resolution systems with PyTorch, CUDA, NetworkX, and TreeSHAP explainability."
+    },
+    { 
+        title: "Full-Stack Web & API Engineering",
+        text: "Building robust, production-ready web platforms from architectural design to deployment. Core stack spans React, TypeScript, Node.js, Express.js, FastAPI, MongoDB, and Tailwind CSS with secure JWT authorization."
+    },
+    { 
+        title: "Cybersecurity & Intelligent Forensics",
+        text: "Engineering automated vulnerability intelligence tools, real-time CVE exploit scoring engines, on-device OCR threat verification, and secure containerized sandbox environments with audit compliance."
+    },
+    { 
+        title: "MLOps, Data Pipelines & Model Optimization",
+        text: "Deploying high-throughput model endpoints, optimizing PyTorch models for CUDA inference, containerizing microservices with Docker, and monitoring convergence using TensorBoard and automated validation."
+    },
+]
+---
+
+<Container variant={'md'}>
+    <div class="text-center mb-6">
+        <span class="font-mono text-12 text-base-600 uppercase tracking-widest block mb-2">SYSTEM_CAPABILITIES // CORE SPECIALIZATIONS</span>
+        <Heading tagName="h2" tagSize="h2" class="text-center">CAPABILITIES</Heading>
+    </div>
+    <div class="flex flex-col gap-4">
+        <Container class="flex flex-col gap-4 p-6 border-3 border-base-900 bg-base-100/40">
+            {
+                engineeringCapabilities.map((capability, index) => (
+                    <Dropdown title={`${index + 1}. ${capability.title}`} text={capability.text} />  
+                ))
+            }       
+        </Container>
+        <ContainerBottom />    
+    </div>
+</Container>

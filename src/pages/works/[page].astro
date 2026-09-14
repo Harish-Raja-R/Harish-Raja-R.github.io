@@ -1,0 +1,189 @@
+---
+// Layout
+import Layout from "../../layouts/Layout.astro";
+
+// Styling
+import "../../styles/markdown.css";
+
+// Components
+import Container from "../../components/elements/Container.astro";
+import Heading from "../../components/elements/Heading.astro";
+import Text from "../../components/elements/Text.astro";
+import ImageContainer from "../../components/elements/ImageContainer.astro";
+import Link from "../../components/elements/Link.astro";
+
+// Routing
+import type { GetStaticPaths } from "astro";
+import { render } from "astro:content";
+import { getCollection } from "astro:content";
+
+export const getStaticPaths = (async () => {
+    const works = await getCollection("works", ({data}) => !data.isDraft);
+    return works.map((work) => ({
+        params: {
+            page: work.data.slug,
+        },
+        props: {
+            work,
+        }
+    }));
+}) satisfies GetStaticPaths;
+
+// props
+const { work } = Astro.props;
+const { Content } = await render(work);
+const { 
+    title, 
+    subtitle, 
+    client, 
+    category, 
+    services, 
+    year, 
+    description, 
+    featuredImage, 
+    imageTwo, 
+    imageThree, 
+    imageFour, 
+    liveSite,
+    githubUrl,
+    technologies = [],
+    metrics = []
+} = work.data;
+
+const details = [
+    { heading: "Domain", text: `${category}` },
+    { heading: "Focus", text: `${client}` },
+    { heading: "Architecture", text: `${services}` },
+    { heading: "Timeline", text: `${year}` }
+];
+---
+
+<Layout 
+    title={`${title} | Harish Raja R Portfolio`}
+    description={description}
+>
+    <Container variant={'xl'} aria-label="Work Details" class="pt-6 md:pt-10 flex flex-col items-center gap-12">
+        <!-- Top Breadcrumb & Tag -->
+        <div class="w-full flex flex-wrap justify-between items-center border-b border-base-900/20 pb-4 font-mono text-12 text-base-600">
+            <a href="/works" class="hover:text-base-900 flex items-center gap-2">
+                <span>&larr;</span>
+                <span class="underline">BACK TO ALL WORKS</span>
+            </a>
+            <div class="flex items-center gap-3">
+                <span class="border border-base-900 bg-base-900 text-base-100 px-2 py-0.5 uppercase font-bold">{category}</span>
+                <span>HARISH RAJA R</span>
+            </div>
+        </div>
+
+        <!-- Title Block -->
+        <div class="text-center flex flex-col items-center gap-3 max-w-4xl">
+            <Heading tagName="h1" tagSize="h1" class="text-center tracking-tight">{title}</Heading>
+            {subtitle && (
+                <p class="font-mono text-18 md:text-24 text-base-800 font-semibold max-w-2xl">
+                    {subtitle}
+                </p>
+            )}
+        </div>
+
+        <!-- Hero Featured Visual -->
+        <div class="w-full max-w-4xl border-2 border-base-900/60 p-2 bg-base-100/40">
+            <ImageContainer src={featuredImage} alt={title} />
+        </div>
+
+        <!-- Metrics Callout Banner -->
+        {metrics.length > 0 && (
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full max-w-4xl">
+                {metrics.map((m) => (
+                    <div class="border border-emerald-800/40 bg-emerald-950/20 p-4 text-center">
+                        <span class="block font-mono text-18 md:text-20 font-bold text-emerald-300">{m}</span>
+                        <span class="font-mono text-11 text-base-500 uppercase tracking-widest">VERIFIED BENCHMARK</span>
+                    </div>
+                ))}
+            </div>
+        )}
+
+        <!-- Metadata Spec Sheet Grid -->
+        <div class="w-full max-w-4xl grid grid-cols-2 md:grid-cols-4 gap-6 border-y-2 border-base-900/40 py-8 bg-base-100/30">
+            {
+                details.map((detail) => (
+                    <div class="text-center px-2">
+                        <span class="block font-mono text-11 text-base-500 uppercase tracking-wider mb-1">{detail.heading}</span>
+                        <Text variant={'sm'} class="text-base-900 font-semibold">{detail.text}</Text>
+                    </div>
+                ))
+            }
+        </div>
+
+        <!-- Technologies Stack Pills -->
+        {technologies.length > 0 && (
+            <div class="flex flex-col items-center gap-3 max-w-4xl w-full">
+                <span class="font-mono text-12 text-base-600 uppercase tracking-widest">ENGINEERING TECH STACK</span>
+                <div class="flex flex-wrap justify-center gap-2">
+                    {technologies.map((tech) => (
+                        <span class="font-mono text-12 text-base-800 bg-base-200/60 border border-base-900/30 px-3 py-1">
+                            {tech}
+                        </span>
+                    ))}
+                </div>
+            </div>
+        )}
+
+        <!-- Primary Action Links -->
+        <div class="flex flex-wrap justify-center gap-4">
+            {githubUrl && (
+                <a 
+                    href={githubUrl} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    class="font-grunge text-24 px-6 py-2 border-2 border-base-900 bg-base-900 text-base-100 hover:bg-transparent hover:text-base-900 uppercase tracking-wide transition-colors"
+                >
+                    GITHUB REPOSITORY &rarr;
+                </a>
+            )}
+            {liveSite && liveSite !== githubUrl && (
+                <a 
+                    href={liveSite} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    class="font-grunge text-24 px-6 py-2 border-2 border-base-900 hover:bg-base-900 hover:text-base-100 text-base-900 uppercase tracking-wide transition-colors"
+                >
+                    LIVE DEMO &rarr;
+                </a>
+            )}
+        </div>
+
+        <!-- Summary Paragraph -->
+        <div class="w-full max-w-3xl text-base-900 border-l-4 border-base-900 pl-6 py-2">
+            <Text variant={'xl'}>{description}</Text>
+        </div>
+
+        <!-- Dual Architecture / Detail Images -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-4xl">
+            <div class="border border-base-900/40 p-2 bg-base-100/30">
+                <ImageContainer src={imageTwo} alt={`${title} Architecture Overview`} />
+                <span class="block text-center font-mono text-11 text-base-600 mt-2">FIG 01 // SYSTEM ARCHITECTURE &amp; TOPOLOGY</span>
+            </div>
+            <div class="border border-base-900/40 p-2 bg-base-100/30">
+                <ImageContainer src={imageThree} alt={`${title} Telemetry Detail`} />
+                <span class="block text-center font-mono text-11 text-base-600 mt-2">FIG 02 // MODEL TELEMETRY &amp; EVALUATION</span>
+            </div>
+        </div>
+
+        <!-- Deep Dive Markdown Content -->
+        <article class="markdown-content w-full max-w-3xl flex flex-col gap-6 font-mono text-16 text-base-800 leading-relaxed border-t border-base-900/20 pt-8">
+            <Content />
+        </article>
+
+        <!-- Full Width Schematic / Interface Image -->
+        <div class="w-full max-w-4xl border border-base-900/40 p-2 bg-base-100/30">
+            <ImageContainer src={imageFour} alt={`${title} Inspection Console`} />
+            <span class="block text-center font-mono text-11 text-base-600 mt-2">FIG 03 // FULL INTERFACE &amp; VERIFICATION LOGS</span>
+        </div>
+
+        <!-- Bottom Navigation -->
+        <div class="flex flex-wrap justify-between items-center w-full max-w-4xl border-t-2 border-base-900/40 pt-8 mt-8">
+            <Link variant={'button'} href="/works">&larr; ALL WORKS</Link>
+            <Link variant={'button'} href="/contact">CONTACT HARISH &rarr;</Link>
+        </div>
+    </Container>
+</Layout>

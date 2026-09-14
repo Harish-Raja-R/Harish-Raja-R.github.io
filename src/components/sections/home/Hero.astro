@@ -1,0 +1,83 @@
+---
+// components
+import Container from "../../elements/Container.astro";
+import Heading from "../../elements/Heading.astro";
+import ImageContainer from "../../elements/ImageContainer.astro";
+import Link from "../../elements/Link.astro";
+
+// assets
+import harishPhoto from "../../../assets/images/harish_portrait.jpg";
+---
+
+<Container variant={"xl"} class="flex flex-col gap-8 min-h-[80vh] pt-4 md:pt-8">
+    <!-- Top System Telemetry Bar -->
+    <div class="flex flex-wrap justify-between items-center gap-4 border-b border-base-900/20 pb-4 font-mono text-12 text-base-600">
+        <div class="flex items-center gap-2">
+            <span class="inline-block w-2 h-2 bg-emerald-400 animate-pulse"></span>
+            <span class="text-base-900 font-semibold tracking-wider">AVAILABLE FOR ROLES & RESEARCH</span>
+        </div>
+        <div class="flex items-center gap-4 text-base-700">
+            <span>COIMBATORE, TN, INDIA</span>
+            <span>&bull;</span>
+            <span>CIT &bull; CGPA 9.32</span>
+        </div>
+    </div>
+
+    <!-- Main Grid: Info + Portrait -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
+        <!-- Text Column (7 cols on lg) -->
+        <div class="lg:col-span-7 flex flex-col items-start gap-6">
+            <!-- Supporting Line -->
+            <div class="inline-block border-2 border-base-900 bg-base-900/10 px-4 py-1.5 font-mono text-14 md:text-16 tracking-widest uppercase text-base-900 font-bold">
+                AI/ML ENGINEER &middot; FULL-STACK DEVELOPER
+            </div>
+
+            <!-- Massive Headline -->
+            <Heading tagName="h1" tagSize="h1" class="text-base-900 tracking-tighter leading-none break-words">
+                HARISH RAJA R
+            </Heading>
+
+            <!-- Intro Statement -->
+            <p class="font-mono text-18 md:text-22 text-base-800 leading-relaxed max-w-2xl border-l-2 border-base-900 pl-4 py-1">
+                I build AI systems, full-stack products and intelligent tools that solve real-world problems.
+            </p>
+
+            <!-- Action Buttons -->
+            <div class="flex flex-wrap gap-4 pt-2">
+                <Link variant={'button'} href="/works">
+                    VIEW MY WORK
+                </Link>
+                <Link variant={'button'} href="/contact" class="bg-base-900 text-base-100 hover:bg-transparent hover:text-base-900">
+                    LET'S CONNECT
+                </Link>
+            </div>
+
+            <!-- Quick Specs Ticker -->
+            <div class="grid grid-cols-3 gap-4 pt-6 border-t border-base-900/20 w-full max-w-xl font-mono">
+                <div>
+                    <span class="block text-24 font-bold text-base-900">9.32</span>
+                    <span class="text-12 text-base-600 uppercase">CGPA / CIT</span>
+                </div>
+                <div>
+                    <span class="block text-24 font-bold text-base-900">6+</span>
+                    <span class="text-12 text-base-600 uppercase">FEATURED PROJECTS</span>
+                </div>
+                <div>
+                    <span class="block text-24 font-bold text-base-900">2029</span>
+                    <span class="text-12 text-base-600 uppercase">M.SC AI&ML</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Image Column (5 cols on lg) -->
+        <div class="lg:col-span-5 flex flex-col items-center">
+            <div class="w-full max-w-md">
+                <ImageContainer src={harishPhoto} alt="Harish Raja R — AI/ML Engineer & Full-Stack Developer" />
+                <div class="flex justify-between items-center pt-2 font-mono text-12 text-base-600">
+                    <span>SPEC_ID: CIT_AIML_2024</span>
+                    <span>HARISH RAJA R</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</Container>

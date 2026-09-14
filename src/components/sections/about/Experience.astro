@@ -1,0 +1,52 @@
+---
+// components
+import Container from "../../elements/Container.astro";
+import Heading from "../../elements/Heading.astro";
+import ResumeDropdown from "../../elements/ResumeDropdown.astro";
+import ContainerBottom from "../../elements/ContainerBottom.astro";
+
+// content
+const experience = [
+    { 
+        title: "Web Development & SEO Analyst Intern",
+        place: "Wexor",
+        period: "May 2026 – Jun 2026",
+        text: "Engineered responsive, accessible client web platforms including Chaapa House, Open Kitchen, Travel Expertz, and Magic Mug. Led organic technical SEO audit implementations and integrated conversational AI chatbots to boost user retention."
+    },
+    { 
+        title: "Web Development Intern",
+        place: "Shalom Solutions Pvt. Ltd.",
+        period: "May 2024 – Jul 2024",
+        text: "Developed 5+ production web interfaces using modern responsive patterns. Improved cross-device compatibility benchmarks by 40% and reduced median page-load latency by 25% across mobile viewports within an Agile 4-member sprint team."
+    },
+    { 
+        title: "Technical Lead",
+        place: "Student Developers Cell (SDC), CIT",
+        period: "2024 – Present",
+        text: "Directing technical initiatives, hackathons, and engineering workshops for campus developers. Mentoring students across full-stack modern web frameworks, Python backend development, and AI integration."
+    },
+    { 
+        title: "Joint Secretary & Head of Cinematography",
+        place: "Photography Club & Film Club, CIT",
+        period: "2024 – Present",
+        text: "Serving as Joint Secretary of Photography Club and Cinematographer/Head of Film Club at CIT. Spearheading visual storytelling, event coverage, and creative media productions across collegiate festivals."
+    }
+];
+---
+
+<Container variant={'md'} id="experience" class="scroll-mt-32">
+    <div class="text-center mb-6">
+        <span class="font-mono text-12 text-base-600 uppercase tracking-widest block mb-2">TIMELINE // TRACK RECORD &amp; ROLES</span>
+        <Heading tagName="h2" tagSize="h2" class="text-center">EXPERIENCE</Heading>
+    </div>
+    <div class="flex flex-col gap-4">  
+        <Container class="flex flex-col gap-4 p-6 border-3 border-base-900 bg-base-100/40">
+            {
+                experience.map((i) => (
+                    <ResumeDropdown title={i.title} place={i.place} period={i.period} text={i.text} />
+                ))
+            }
+        </Container>
+        <ContainerBottom />
+    </div>
+</Container>

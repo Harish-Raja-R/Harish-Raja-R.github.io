@@ -1,0 +1,24 @@
+{
+  "name": "Grunge",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "test:e2e": "playwright test",
+    "test:screenshots": "playwright test tests/screenshots.spec.ts",
+    "test:visual": "playwright test tests/visual.spec.ts"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.3",
+    "@tailwindcss/vite": "^4.1.17",
+    "astro": "^7.2.5",
+    "tailwindcss": "^4.1.17",
+    "tailwindcss-noise": "^1.0.6"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.63.0"
+  }
+}

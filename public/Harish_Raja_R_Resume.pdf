@@ -1,0 +1,103 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 842] /Resources << /Font << /F1 4 0 R /F2 5 0 R >> >> /Contents 6 0 R >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+6 0 obj
+<< /Length 2353 >>
+stream
+BT
+/F1 18 Tf
+50 780 Td
+(HARISH RAJA R) Tj
+/F2 10 Tf
+0 -18 Td
+(AI/ML ENGINEER | FULL-STACK DEVELOPER | CYBERSECURITY) Tj
+0 -14 Td
+(harishatgithub@gmail.com | +91 63697 14360 | Coimbatore, TN, India) Tj
+0 -14 Td
+(GitHub: https://github.com/Harish-Raja-R | LinkedIn: https://linkedin.com/in/harish-raja-r) Tj
+0 -22 Td
+/F1 12 Tf
+(EDUCATION) Tj
+/F2 9 Tf
+0 -14 Td
+(Coimbatore Institute of Technology - Integrated M.Sc. AI & ML \(2024 - 2029\) | CGPA: 9.32/10.0) Tj
+0 -22 Td
+/F1 12 Tf
+(CORE SKILLS) Tj
+/F2 9 Tf
+0 -14 Td
+(Languages: Python, JavaScript, TypeScript, SQL, C/C++) Tj
+0 -12 Td
+(AI/ML: PyTorch, Scikit-learn, XGBoost, LightGBM, BERT, ResNet-18, NAFNet-SR, SHAP, NetworkX, CUDA) Tj
+0 -12 Td
+(Web & APIs: React, Vite, Node.js, Express.js, FastAPI, Flask, Tailwind CSS, Streamlit, Gradio) Tj
+0 -12 Td
+(Databases & DevOps: MongoDB, MySQL, Firebase, Docker, AWS, Git, GitHub, TensorBoard) Tj
+0 -22 Td
+/F1 12 Tf
+(FEATURED PROJECTS) Tj
+/F2 9 Tf
+0 -14 Td
+(1. NEUROCOLLAB: Graph ML Academic Collaboration Link Prediction \(97.1% Acc, 99.8% AUC-ROC, SHAP XAI\)) Tj
+0 -12 Td
+(2. SEMIRESTORE-AI: Semiconductor Wafer Super-Resolution with NAFNet-SR & PyTorch CUDA) Tj
+0 -12 Td
+(3. A.U.R.A.: Multimodal Deepfake & Fake News Forensics using BERT + ResNet-18 Cross-Attention) Tj
+0 -12 Td
+(4. COMPLYONE: Full-Stack Enterprise Compliance Suite \(React, Vite, Node, Express, MongoDB, JWT\)) Tj
+0 -12 Td
+(5. VULTRA: Real-Time Vulnerability Intelligence Platform \(FastAPI, Pydantic, Docker, React, TS\)) Tj
+0 -12 Td
+(6. SCAMCHECK: Cybersecurity Threat Verification & On-Device Tesseract OCR Phishing Scanner) Tj
+0 -22 Td
+/F1 12 Tf
+(EXPERIENCE) Tj
+/F2 9 Tf
+0 -14 Td
+(Wexor - Web Development & SEO Analyst Intern \(May 2026 - Jun 2026\)) Tj
+0 -12 Td
+(  - Developed client sites \(Chaapa House, Open Kitchen, Travel Expertz, Magic Mug\); integrated AI chatbots) Tj
+0 -12 Td
+(Shalom Solutions Pvt. Ltd. - Web Development Intern \(May 2024 - Jul 2024\)) Tj
+0 -12 Td
+(  - Built 5+ responsive interfaces; +40% cross-device compatibility; -25% load latency in Agile team) Tj
+0 -22 Td
+/F1 12 Tf
+(LEADERSHIP & CAMPUS ROLES) Tj
+/F2 9 Tf
+0 -14 Td
+(  - Technical Lead, Student Developers Cell \(SDC\), CIT \(2024 - Present\)) Tj
+0 -12 Td
+(  - Joint Secretary, Photography Club, CIT \(2024 - Present\)) Tj
+0 -12 Td
+(  - Cinematographer & Head, Film Club, CIT \(2024 - Present\)) Tj
+ET
+endstream
+endobj
+xref
+0 7
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000244 00000 n 
+0000000321 00000 n 
+0000000393 00000 n 
+trailer
+<< /Size 7 /Root 1 0 R >>
+startxref
+2960
+%%EOF

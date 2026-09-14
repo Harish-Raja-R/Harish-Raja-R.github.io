@@ -1,0 +1,155 @@
+---
+// layout
+import Layout from "../layouts/Layout.astro";
+
+// components
+import Container from "../components/elements/Container.astro";
+import Heading from "../components/elements/Heading.astro";
+import Text from "../components/elements/Text.astro";
+import ResumeDropdown from "../components/elements/ResumeDropdown.astro";
+import ContainerBottom from "../components/elements/ContainerBottom.astro";
+import Link from "../components/elements/Link.astro";
+
+const industryExperience = [
+    {
+        role: "Web Development & SEO Analyst Intern",
+        company: "Wexor",
+        period: "May 2026 – Jun 2026",
+        location: "Remote / Hybrid",
+        highlights: [
+            "Architected and deployed responsive client websites including Chaapa House, Open Kitchen, Travel Expertz, and Magic Mug.",
+            "Executed comprehensive on-page technical SEO audits, semantic tag optimizations, and metadata restructuring.",
+            "Integrated conversational AI chatbots into client storefronts to drive user self-service and increase inquiry conversions."
+        ]
+    },
+    {
+        role: "Web Development Intern",
+        company: "Shalom Solutions Pvt. Ltd.",
+        period: "May 2024 – Jul 2024",
+        location: "Coimbatore, India",
+        highlights: [
+            "Engineered 5+ responsive web interfaces conforming strictly to modern mobile-first UI/UX standards.",
+            "Improved cross-device compatibility benchmarks by 40% across iOS, Android, and diverse desktop resolutions.",
+            "Optimized asset pipelines and core web vitals, reducing page-load time by 25%.",
+            "Collaborated within an Agile 4-member developer sprint team utilizing Git version control."
+        ]
+    }
+];
+
+const leadershipRoles = [
+    {
+        role: "Technical Lead",
+        organization: "Student Developers Cell (SDC)",
+        institution: "Coimbatore Institute of Technology",
+        period: "2024 – Present",
+        description: "Directing technical initiatives, hackathons, and engineering workshops for campus developers. Mentoring students across full-stack modern web frameworks, Python backend development, and AI integration."
+    },
+    {
+        role: "Joint Secretary",
+        organization: "Photography Club",
+        institution: "Coimbatore Institute of Technology",
+        period: "2024 – Present",
+        description: "Managing club logistics, organizing visual arts exhibitions, coordinating masterclasses on optics and composition, and curating photographic archives."
+    },
+    {
+        role: "Cinematographer / Head",
+        organization: "Film Club",
+        institution: "Coimbatore Institute of Technology",
+        period: "2024 – Present",
+        description: "Head of cinematography and technical production for collegiate short films, festival teasers, and visual media campaigns."
+    }
+];
+---
+
+<Layout 
+    title="Experience & Leadership | Harish Raja R"
+    description="Professional software engineering internships, client deliverables, and collegiate technical leadership of Harish Raja R."
+>
+    <Container variant={'xl'} class="pt-6 md:pt-10 flex flex-col items-center gap-12">
+        <!-- Header -->
+        <div class="text-center flex flex-col items-center gap-3">
+            <div class="inline-flex items-center gap-2 border border-base-900/40 bg-base-900/10 px-3 py-1 font-mono text-12 text-base-900 uppercase">
+                <span>TIMELINE // 04_EXPERIENCE_RECORDS</span>
+                <span>&bull;</span>
+                <span>VERIFIED TRACK RECORD</span>
+            </div>
+            <Heading tagName="h1" tagSize="h1" class="text-center tracking-tight">EXPERIENCE</Heading>
+            <p class="font-mono text-16 text-base-700 max-w-2xl text-center">
+                Engineering internships, production web applications, measurable performance gains, and campus technical leadership.
+            </p>
+        </div>
+
+        <!-- Industry Internships -->
+        <div class="w-full max-w-4xl flex flex-col gap-6">
+            <div class="border-b-2 border-base-900 pb-2 flex justify-between items-end">
+                <span class="font-grunge text-32 text-base-900 uppercase tracking-wide">01 // INDUSTRY INTERNSHIPS</span>
+                <span class="font-mono text-12 text-base-600">PRODUCTION ROLES</span>
+            </div>
+
+            <div class="flex flex-col gap-6">
+                {industryExperience.map((exp) => (
+                    <div class="border-2 border-base-900 bg-base-100/50 p-6 md:p-8 flex flex-col gap-4">
+                        <div class="flex flex-col md:flex-row md:justify-between md:items-center gap-2 border-b border-base-900/20 pb-3">
+                            <div>
+                                <h3 class="font-grunge text-32 text-base-900 uppercase tracking-tight">{exp.role}</h3>
+                                <p class="font-mono text-18 font-bold text-base-800">{exp.company}</p>
+                            </div>
+                            <div class="text-left md:text-right font-mono text-12 text-base-600">
+                                <span class="block text-base-900 font-semibold">{exp.period}</span>
+                                <span>{exp.location}</span>
+                            </div>
+                        </div>
+
+                        <ul class="flex flex-col gap-2 font-mono text-14 text-base-800 pt-2 list-disc list-inside">
+                            {exp.highlights.map((point) => (
+                                <li class="leading-relaxed">{point}</li>
+                            ))}
+                        </ul>
+                    </div>
+                ))}
+            </div>
+        </div>
+
+        <!-- Campus Leadership -->
+        <div class="w-full max-w-4xl flex flex-col gap-6 mt-6">
+            <div class="border-b-2 border-base-900 pb-2 flex justify-between items-end">
+                <span class="font-grunge text-32 text-base-900 uppercase tracking-wide">02 // CAMPUS LEADERSHIP</span>
+                <span class="font-mono text-12 text-base-600">CIT COIMBATORE</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {leadershipRoles.map((role) => (
+                    <div class="border-2 border-base-900 bg-base-100/40 p-6 flex flex-col justify-between gap-4">
+                        <div>
+                            <span class="font-mono text-11 text-base-500 uppercase tracking-wider block mb-1">{role.institution}</span>
+                            <h3 class="font-grunge text-24 text-base-900 uppercase tracking-tight">{role.role}</h3>
+                            <p class="font-mono text-14 font-semibold text-base-800 mb-2">{role.organization}</p>
+                            <p class="font-mono text-12 text-base-700 leading-relaxed">{role.description}</p>
+                        </div>
+                        <div class="pt-3 border-t border-base-900/20 font-mono text-11 text-base-500">
+                            {role.period}
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </div>
+
+        <!-- Bottom Action CTA -->
+        <div class="flex flex-wrap justify-center gap-4 mt-8">
+            <a 
+                href="/Harish_Raja_R_Resume.pdf" 
+                download="Harish_Raja_R_Resume.pdf"
+                class="font-grunge text-24 px-6 py-2 border-2 border-base-900 bg-base-900 text-base-100 hover:bg-transparent hover:text-base-900 uppercase tracking-wide transition-colors"
+            >
+                DOWNLOAD FULL RESUME &rarr;
+            </a>
+            <Link variant={'button'} href="/contact">
+                LET'S CONNECT
+            </Link>
+        </div>
+
+        <div class="w-full max-w-4xl">
+            <ContainerBottom />
+        </div>
+    </Container>
+</Layout>

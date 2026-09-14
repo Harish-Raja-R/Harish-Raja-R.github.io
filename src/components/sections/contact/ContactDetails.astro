@@ -1,0 +1,187 @@
+---
+// components
+import Container from "../../elements/Container.astro";
+import ContactItem from "./ContactItem.astro";
+import ContainerBottom from "../../elements/ContainerBottom.astro";
+import Heading from "../../elements/Heading.astro";
+import Link from "../../elements/Link.astro";
+---
+
+<Container variant={'xl'} class="flex flex-col gap-12">
+    <!-- Contact Info Cards Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 text-base-900 w-full">
+        <ContactItem 
+            title="DIRECT EMAIL" 
+            contact="harishatgithub@gmail.com" 
+            href="mailto:harishatgithub@gmail.com" 
+            subtext="Primary communication channel &bull; Monitored daily"
+        />
+        <ContactItem 
+            title="PHONE / WHATSAPP" 
+            contact="+91 63697 14360" 
+            href="tel:+916369714360" 
+            subtext="Calls &amp; WhatsApp inquiries"
+        />
+        <ContactItem 
+            title="GITHUB PROFILE" 
+            contact="github.com/Harish-Raja-R" 
+            href="https://github.com/Harish-Raja-R" 
+            subtext="6+ repositories &bull; Open-source AI &amp; Web projects"
+        />
+        <ContactItem 
+            title="LINKEDIN NETWORK" 
+            contact="linkedin.com/in/harish-raja-r" 
+            href="https://linkedin.com/in/harish-raja-r" 
+            subtext="Professional network &bull; Technical updates"
+        />
+        <ContactItem 
+            title="CAMPUS AFFILIATION" 
+            contact="Coimbatore Institute of Tech (CIT)" 
+            href="https://www.cit.edu.in" 
+            subtext="Integrated M.Sc. AI &amp; ML &bull; CGPA 9.32"
+        />
+        <ContactItem 
+            title="GEOGRAPHIC BASE" 
+            contact="Coimbatore, Tamil Nadu, India" 
+            subtext="Available for on-site, hybrid &amp; remote roles"
+        />
+    </div>
+
+    <!-- Direct Transmission Console -->
+    <div class="border-3 border-base-900 bg-base-100/50 p-6 md:p-10 w-full max-w-4xl mx-auto">
+        <div class="border-b-2 border-base-900 pb-4 mb-6 flex justify-between items-center">
+            <div>
+                <span class="font-mono text-11 text-base-500 uppercase tracking-widest block">CONSOLE // DIRECT TRANSMISSION</span>
+                <Heading tagName="h2" tagSize="h3" class="tracking-tight">SEND A MESSAGE</Heading>
+            </div>
+            <div class="hidden sm:flex items-center gap-2 font-mono text-11 text-emerald-400">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span>ONLINE // READY</span>
+            </div>
+        </div>
+
+        <form id="contact-form" class="flex flex-col gap-6 font-mono">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="flex flex-col gap-2">
+                    <label for="name" class="text-12 text-base-700 uppercase tracking-wider">Your Name *</label>
+                    <input 
+                        type="text" 
+                        id="name" 
+                        name="name" 
+                        required 
+                        placeholder="Your name / hiring team / company"
+                        class="border-2 border-base-900/60 bg-base-200/40 p-3 text-base-900 placeholder:text-base-600 focus:outline-none focus:border-base-900"
+                    />
+                </div>
+                <div class="flex flex-col gap-2">
+                    <label for="email" class="text-12 text-base-700 uppercase tracking-wider">Your Email *</label>
+                    <input 
+                        type="email" 
+                        id="email" 
+                        name="email" 
+                        required 
+                        placeholder="your.email@company.com"
+                        class="border-2 border-base-900/60 bg-base-200/40 p-3 text-base-900 placeholder:text-base-600 focus:outline-none focus:border-base-900"
+                    />
+                </div>
+            </div>
+
+            <div class="flex flex-col gap-2">
+                <label for="subject" class="text-12 text-base-700 uppercase tracking-wider">Subject / Inquiry Type *</label>
+                <input 
+                    type="text" 
+                    id="subject" 
+                    name="subject" 
+                    required 
+                    placeholder="e.g. AI/ML Engineering Role / Research Collaboration"
+                    class="border-2 border-base-900/60 bg-base-200/40 p-3 text-base-900 placeholder:text-base-600 focus:outline-none focus:border-base-900"
+                />
+            </div>
+
+            <div class="flex flex-col gap-2">
+                <label for="message" class="text-12 text-base-700 uppercase tracking-wider">Message Details *</label>
+                <textarea 
+                    id="message" 
+                    name="message" 
+                    rows="5" 
+                    required 
+                    placeholder="Briefly describe your project, team, or opportunity..."
+                    class="border-2 border-base-900/60 bg-base-200/40 p-3 text-base-900 placeholder:text-base-600 focus:outline-none focus:border-base-900 resize-y"
+                ></textarea>
+            </div>
+
+            <div class="flex flex-wrap items-center justify-between gap-4 pt-2">
+                <button 
+                    type="submit" 
+                    class="font-grunge text-24 px-8 py-3 border-2 border-base-900 bg-base-900 text-base-100 hover:bg-transparent hover:text-base-900 uppercase tracking-wider transition-colors cursor-pointer"
+                >
+                    DISPATCH TRANSMISSION &rarr;
+                </button>
+
+                <button 
+                    type="button" 
+                    id="copy-email-btn"
+                    class="font-mono text-12 text-base-700 hover:text-base-900 border border-base-900/40 px-4 py-2 hover:border-base-900 transition-colors cursor-pointer"
+                >
+                    COPY EMAIL TO CLIPBOARD
+                </button>
+            </div>
+
+            <div id="form-feedback" class="hidden p-3 border border-emerald-500 bg-emerald-950/30 text-emerald-300 text-12 font-mono">
+                Redirecting to your default mail client with pre-formatted transmission...
+            </div>
+        </form>
+    </div>
+
+    <div class="w-full max-w-4xl mx-auto">
+        <ContainerBottom />
+    </div>
+</Container>
+
+<script>
+    const initContactForm = () => {
+        const form = document.getElementById('contact-form') as HTMLFormElement | null;
+        const feedback = document.getElementById('form-feedback');
+        const copyBtn = document.getElementById('copy-email-btn');
+
+        if (copyBtn && !copyBtn.hasAttribute('data-initialized')) {
+            copyBtn.setAttribute('data-initialized', 'true');
+            copyBtn.addEventListener('click', async () => {
+                try {
+                    await navigator.clipboard.writeText('harishatgithub@gmail.com');
+                    copyBtn.textContent = 'EMAIL COPIED (harishatgithub@gmail.com)!';
+                    setTimeout(() => {
+                        copyBtn.textContent = 'COPY EMAIL TO CLIPBOARD';
+                    }, 3000);
+                } catch (e) {
+                    copyBtn.textContent = 'harishatgithub@gmail.com';
+                }
+            });
+        }
+
+        if (form && feedback && !form.hasAttribute('data-initialized')) {
+            form.setAttribute('data-initialized', 'true');
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const name = (document.getElementById('name') as HTMLInputElement).value;
+                const email = (document.getElementById('email') as HTMLInputElement).value;
+                const subject = (document.getElementById('subject') as HTMLInputElement).value;
+                const message = (document.getElementById('message') as HTMLTextAreaElement).value;
+
+                feedback.classList.remove('hidden');
+
+                const mailtoUrl = `mailto:harishatgithub@gmail.com?subject=${encodeURIComponent(`[Portfolio Inquiry] ${subject}`)}&body=${encodeURIComponent(`From: ${name} (${email})\n\n${message}`)}`;
+                
+                setTimeout(() => {
+                    window.location.href = mailtoUrl;
+                }, 400);
+            });
+        }
+    };
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initContactForm);
+    } else {
+        initContactForm();
+    }
+</script>

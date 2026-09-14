@@ -1,0 +1,30 @@
+---
+// components
+import Heading from "../../elements/Heading.astro";
+import Container from "../../elements/Container.astro";
+import Text from "../../elements/Text.astro";
+---
+
+<Container variant={'xl'} class="text-center text-base-900 flex flex-col items-center pt-6 md:pt-10">
+    <div class="inline-flex items-center gap-2 border border-base-900/40 bg-base-900/10 px-3 py-1 font-mono text-12 text-base-900 uppercase mb-4">
+        <span>TRANSMISSION // 05_CONTACT</span>
+        <span>&bull;</span>
+        <span>SECURE LINE</span>
+    </div>
+    <Heading tagName="h1" tagSize="h1">CONTACT</Heading>
+    <div class="max-w-2xl flex flex-col gap-4 mt-4">
+        <p class="font-mono text-20 md:text-24 text-base-900 font-bold">
+            Let's Build Intelligent Systems Together.
+        </p>
+        <Text variant={'sm'} class="text-base-800">
+            Whether you are exploring AI/ML research partnerships, looking for a driven full-stack developer, or seeking solutions for complex engineering problems, my inbox is always open.
+        </Text>
+        <div class="font-mono text-12 text-base-600 flex flex-wrap justify-center gap-4 pt-2">
+            <span>LOCATION: COIMBATORE, TN, INDIA</span>
+            <span>&bull;</span>
+            <span>STATUS: OPEN FOR ROLES</span>
+            <span>&bull;</span>
+            <span>RESPONSE TIME: &lt; 24H</span>
+        </div>
+    </div>
+</Container>

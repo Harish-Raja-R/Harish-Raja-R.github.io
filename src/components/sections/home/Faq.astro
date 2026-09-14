@@ -1,0 +1,48 @@
+---
+// components
+import Container from "../../elements/Container.astro";
+import ContainerBottom from "../../elements/ContainerBottom.astro";
+import Heading from "../../elements/Heading.astro";
+import Dropdown from "../../elements/Dropdown.astro";
+
+// content
+const faq = [
+    { 
+        title: "What are your primary technical specializations?",
+        text: "My core expertise centers on Graph Machine Learning (link prediction, GNNs, topological feature extraction), Computer Vision super-resolution (NAFNet-SR, CUDA acceleration), Multimodal Forensics (BERT + ResNet-18), and Full-Stack Engineering with React, TypeScript, FastAPI, and Node.js."
+    },
+    { 
+        title: "Are you available for engineering internships and research roles?",
+        text: "Yes. I am actively seeking challenging software engineering, AI/ML research, and cybersecurity internship opportunities where I can apply rigorous modeling and systems engineering to production-grade problems."
+    },
+    { 
+        title: "How do you approach model explainability in AI systems?",
+        text: "I prioritize interpretable and trustworthy AI. In systems like NeuroCollab, I integrate TreeSHAP and topological attribution algorithms so domain experts can audit the exact mathematical factors driving every prediction."
+    },
+    { 
+        title: "What is your typical full-stack development workflow?",
+        text: "I adhere to strict type contracts and modular architectures: typed schemas with TypeScript and Pydantic, secure JWT/RBAC middleware, optimized database queries with MongoDB and SQL, and responsive frontend interfaces built for high performance."
+    },
+    { 
+        title: "How can teams get in touch or explore collaborations?",
+        text: "You can reach out directly via email at harishatgithub@gmail.com, connect on LinkedIn (linkedin.com/in/harish-raja-r), or inspect active repositories on GitHub (github.com/Harish-Raja-R)."
+    },
+]
+---
+
+<Container variant={'md'}>
+    <div class="text-center mb-6">
+        <span class="font-mono text-12 text-base-600 uppercase tracking-widest block mb-2">TELEMETRY // QUESTIONS &amp; TECHNICAL INQUIRIES</span>
+        <Heading tagName="h2" tagSize="h2" class="text-center">FAQ</Heading>
+    </div>
+    <div class="flex flex-col gap-4">
+        <Container class="flex flex-col gap-4 p-6 border-3 border-base-900 bg-base-100/40">
+            {
+                faq.map((q, index) => (
+                    <Dropdown title={`${index + 1}. ${q.title}`} text={q.text} />
+                ))
+            }
+        </Container>
+        <ContainerBottom />        
+    </div>
+</Container>

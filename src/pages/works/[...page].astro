@@ -1,0 +1,306 @@
+---
+// layout
+import Layout from "../../layouts/Layout.astro";
+
+// components
+import Heading from "../../components/elements/Heading.astro";
+import Container from "../../components/elements/Container.astro";
+import Work from "../../components/elements/Work.astro";
+import Pagination from "../../components/sections/works/Pagination.astro";
+
+// routing
+import type { GetStaticPaths } from "astro";
+import { getCollection } from "astro:content";
+export const getStaticPaths = (async ({paginate}) => {
+    const works = await getCollection("works", ({data}) => !data.isDraft);
+    return paginate(works, {pageSize: 12});
+}) satisfies GetStaticPaths;
+
+// props
+const { page } = Astro.props;
+
+const categories = ["ALL", "AI/ML", "FULL-STACK", "CYBERSECURITY"];
+---
+
+<Layout 
+    title="Engineering Works | Harish Raja R"
+    description="Engineered systems, deep learning research, and intelligent cybersecurity platforms by Harish Raja R."
+>
+    <Container variant={'xl'} class="pt-6 md:pt-10 flex flex-col items-center">
+        <!-- Header -->
+        <div class="text-center flex flex-col items-center gap-3 mb-8">
+            <div class="inline-flex items-center gap-2 border border-base-900/40 bg-base-900/10 px-3 py-1 font-mono text-12 text-base-900 uppercase">
+                <span>CATALOG // 02_ENGINEERING_WORKS</span>
+                <span>&bull;</span>
+                <span>SYSTEMS REPOSITORY</span>
+            </div>
+            <Heading tagName="h1" tagSize="h1" class="text-center tracking-tight">
+                WORKS
+            </Heading>
+            <p class="font-mono text-16 text-base-700 max-w-2xl text-center">
+                Production-grade machine learning models, wafer super-resolution, forensic neural networks, and cybersecurity architectures.
+            </p>
+        </div>
+
+        <!-- Filter Tabs -->
+        <div class="flex flex-wrap justify-center gap-2 md:gap-4 mb-12 border border-base-900/30 p-2 bg-base-100/60" id="filter-container">
+            {categories.map((cat, idx) => (
+                <button 
+                    type="button"
+                    class:list={[
+                        "filter-btn font-mono text-12 md:text-14 px-4 py-2 border transition-all duration-200 cursor-pointer uppercase tracking-wider",
+                        idx === 0 
+                            ? "bg-base-900 text-base-100 border-base-900 active-filter" 
+                            : "border-base-900/40 text-base-800 hover:border-base-900 hover:text-base-900"
+                    ]}
+                    data-category={cat}
+                >
+                    {cat}
+                </button>
+            ))}
+        </div>
+
+        <!-- Projects Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full" id="projects-grid">
+            {page.data.map((work) => (
+                <div class="project-card transition-all duration-300" data-cat={work.data.category.toUpperCase().replace(/\s+/g, '')}>
+                    <Work 
+                        slug={work.data.slug}
+                        featuredImage={work.data.featuredImage}
+                        title={work.data.title}
+                        subtitle={work.data.subtitle}
+                        client={work.data.client}
+                        category={work.data.category}
+                        technologies={work.data.technologies}
+                        metrics={work.data.metrics}
+                        githubUrl={work.data.githubUrl}
+                        liveSite={work.data.liveSite}
+                        description={work.data.description}
+                    />
+                </div>
+            ))}
+        </div>
+
+        {page.total > page.size && (
+            <div class="flex flex-row gap-2 mt-12">
+                <Pagination prev={page.url.prev}></Pagination>
+                <Pagination next={page.url.next}></Pagination>
+            </div>
+        )}
+    </Container>
+
+    <!-- Quick View Project Modal -->
+    <div 
+        id="project-modal" 
+        class="hidden fixed inset-0 z-50 overflow-y-auto bg-base-100/90 backdrop-blur-md p-4 sm:p-6 md:p-10 flex items-center justify-center"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modal-title"
+    >
+        <div class="relative w-full max-w-2xl border-3 border-base-900 bg-base-100 p-6 md:p-8 shadow-2xl flex flex-col gap-5">
+            <!-- Modal Header -->
+            <div class="flex justify-between items-start border-b border-base-900/30 pb-4">
+                <div class="flex flex-col gap-1">
+                    <div class="flex items-center gap-2">
+                        <span id="modal-category" class="font-mono text-11 bg-base-900 text-base-100 px-2 py-0.5 uppercase font-bold"></span>
+                        <span id="modal-client" class="font-mono text-12 text-base-600 uppercase"></span>
+                    </div>
+                    <h2 id="modal-title" class="font-grunge text-36 md:text-48 text-base-900 uppercase tracking-tight"></h2>
+                    <p id="modal-subtitle" class="font-mono text-14 text-base-800 font-semibold"></p>
+                </div>
+                <button 
+                    id="close-modal" 
+                    type="button" 
+                    class="p-2 border border-base-900 text-base-900 hover:bg-base-900 hover:text-base-100 transition-colors cursor-pointer"
+                    aria-label="Close modal"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Modal Metrics -->
+            <div id="modal-metrics-container" class="grid grid-cols-1 sm:grid-cols-2 gap-2"></div>
+
+            <!-- Modal Description -->
+            <div class="border-l-2 border-base-900 pl-4 py-1">
+                <p id="modal-description" class="font-mono text-14 text-base-700 leading-relaxed"></p>
+            </div>
+
+            <!-- Modal Tech Stack -->
+            <div class="flex flex-col gap-2">
+                <span class="font-mono text-11 text-base-500 uppercase tracking-wider">TECHNOLOGIES &amp; TOOLS</span>
+                <div id="modal-tech-container" class="flex flex-wrap gap-1.5"></div>
+            </div>
+
+            <!-- Modal Action Buttons -->
+            <div class="flex flex-wrap items-center justify-between gap-4 border-t border-base-900/30 pt-4 mt-2">
+                <a 
+                    id="modal-case-study-link" 
+                    href="#" 
+                    class="font-grunge text-24 px-6 py-2 border-2 border-base-900 bg-base-900 text-base-100 hover:bg-transparent hover:text-base-900 uppercase tracking-wide transition-colors"
+                >
+                    FULL CASE STUDY &rarr;
+                </a>
+                <div class="flex items-center gap-3">
+                    <a 
+                        id="modal-github-link" 
+                        href="#" 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        class="hidden font-mono text-12 px-3 py-2 border border-base-900/60 hover:bg-base-900 hover:text-base-100 text-base-900 uppercase transition-colors"
+                    >
+                        GITHUB REPO
+                    </a>
+                    <a 
+                        id="modal-live-link" 
+                        href="#" 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        class="hidden font-mono text-12 px-3 py-2 border border-base-900/60 hover:bg-base-900 hover:text-base-100 text-base-900 uppercase transition-colors"
+                    >
+                        LIVE DEMO
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</Layout>
+
+<script>
+    const initWorksPage = () => {
+        // Filter functionality
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const projectCards = document.querySelectorAll('.project-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const targetCat = btn.getAttribute('data-category')?.toUpperCase().replace(/\s+/g, '') || 'ALL';
+
+                filterBtns.forEach(b => {
+                    b.classList.remove('bg-base-900', 'text-base-100', 'active-filter');
+                    b.classList.add('border-base-900/40', 'text-base-800');
+                });
+                btn.classList.add('bg-base-900', 'text-base-100', 'active-filter');
+                btn.classList.remove('border-base-900/40', 'text-base-800');
+
+                projectCards.forEach(card => {
+                    const cardCat = card.getAttribute('data-cat') || '';
+                    if (targetCat === 'ALL' || cardCat.includes(targetCat)) {
+                        (card as HTMLElement).style.display = 'block';
+                    } else {
+                        (card as HTMLElement).style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Quick View Modal
+        const modal = document.getElementById('project-modal');
+        const closeModalBtn = document.getElementById('close-modal');
+        const modalTitle = document.getElementById('modal-title');
+        const modalSubtitle = document.getElementById('modal-subtitle');
+        const modalCategory = document.getElementById('modal-category');
+        const modalClient = document.getElementById('modal-client');
+        const modalDesc = document.getElementById('modal-description');
+        const modalMetrics = document.getElementById('modal-metrics-container');
+        const modalTech = document.getElementById('modal-tech-container');
+        const modalCaseStudyLink = document.getElementById('modal-case-study-link') as HTMLAnchorElement | null;
+        const modalGithubLink = document.getElementById('modal-github-link') as HTMLAnchorElement | null;
+        const modalLiveLink = document.getElementById('modal-live-link') as HTMLAnchorElement | null;
+
+        const openModal = (btn: HTMLElement) => {
+            if (!modal) return;
+            const title = btn.getAttribute('data-title') || '';
+            const subtitle = btn.getAttribute('data-subtitle') || '';
+            const category = btn.getAttribute('data-category') || '';
+            const client = btn.getAttribute('data-client') || '';
+            const desc = btn.getAttribute('data-description') || '';
+            const slug = btn.getAttribute('data-slug') || '';
+            const github = btn.getAttribute('data-github') || '';
+            const live = btn.getAttribute('data-live') || '';
+            const tech: string[] = JSON.parse(btn.getAttribute('data-tech') || '[]');
+            const metrics: string[] = JSON.parse(btn.getAttribute('data-metrics') || '[]');
+
+            if (modalTitle) modalTitle.textContent = title;
+            if (modalSubtitle) modalSubtitle.textContent = subtitle;
+            if (modalCategory) modalCategory.textContent = category;
+            if (modalClient) modalClient.textContent = client;
+            if (modalDesc) modalDesc.textContent = desc;
+
+            if (modalCaseStudyLink) modalCaseStudyLink.href = `/works/${slug}`;
+
+            if (modalGithubLink) {
+                if (github) {
+                    modalGithubLink.href = github;
+                    modalGithubLink.classList.remove('hidden');
+                } else {
+                    modalGithubLink.classList.add('hidden');
+                }
+            }
+
+            if (modalLiveLink) {
+                if (live && live !== github && !live.includes('github.com') && live !== `/works/${slug}`) {
+                    modalLiveLink.href = live;
+                    modalLiveLink.classList.remove('hidden');
+                } else {
+                    modalLiveLink.classList.add('hidden');
+                }
+            }
+
+            if (modalMetrics) {
+                modalMetrics.innerHTML = '';
+                metrics.forEach(m => {
+                    const el = document.createElement('div');
+                    el.className = 'border border-emerald-800/40 bg-emerald-950/20 px-3 py-1.5 font-mono text-12 text-emerald-300 flex items-center gap-2';
+                    el.innerHTML = `<span class="w-1.5 h-1.5 bg-emerald-400"></span><span>${m}</span>`;
+                    modalMetrics.appendChild(el);
+                });
+            }
+
+            if (modalTech) {
+                modalTech.innerHTML = '';
+                tech.forEach(t => {
+                    const el = document.createElement('span');
+                    el.className = 'font-mono text-11 text-base-800 bg-base-200/60 border border-base-900/30 px-2.5 py-1';
+                    el.textContent = t;
+                    modalTech.appendChild(el);
+                });
+            }
+
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            closeModalBtn?.focus();
+        };
+
+        const closeModal = () => {
+            if (!modal) return;
+            modal.classList.add('hidden');
+            document.body.style.overflow = '';
+        };
+
+        document.querySelectorAll('.quick-view-btn').forEach(btn => {
+            btn.addEventListener('click', () => openModal(btn as HTMLElement));
+        });
+
+        closeModalBtn?.addEventListener('click', closeModal);
+
+        modal?.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+        });
+
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal && !modal.classList.contains('hidden')) {
+                closeModal();
+            }
+        });
+    };
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initWorksPage);
+    } else {
+        initWorksPage();
+    }
+</script>

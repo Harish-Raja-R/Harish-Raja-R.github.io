@@ -1,0 +1,39 @@
+---
+// layout
+import Layout from "../layouts/Layout.astro";
+
+// components
+import Container from "../components/elements/Container.astro";
+import Heading from "../components/elements/Heading.astro";
+import Text from "../components/elements/Text.astro";
+import Link from "../components/elements/Link.astro";
+import ContainerBottom from "../components/elements/ContainerBottom.astro";
+---
+
+<Layout 
+    title="404 — Signal Lost | Harish Raja R"
+    description="The requested route or portfolio telemetry stream was not found."
+>
+    <Container variant={'xl'} class="text-center flex flex-col items-center pt-8 pb-16 gap-8">
+        <div class="inline-flex items-center gap-2 border border-red-500/40 bg-red-950/20 px-3 py-1 font-mono text-12 text-red-400 uppercase">
+            <span class="w-2 h-2 rounded-full bg-red-500 animate-ping"></span>
+            <span>SYSTEM_ERROR // 404_SIGNAL_LOST</span>
+        </div>
+
+        <Heading tagName="h1" tagSize="h1">404 // NOT FOUND</Heading>
+
+        <div class="max-w-xl border-l-2 border-base-900 pl-4 py-1 text-left">
+            <Text variant={'xl'} class="text-base-900">The requested endpoint or telemetry stream does not exist in the Harish Raja R portfolio architecture.</Text>
+            <p class="font-mono text-14 text-base-600 mt-2">Check the route URL or return to the main operational directory.</p>
+        </div>
+        
+        <div class="flex gap-4 pt-4">
+            <Link variant={'button'} href="/">BASE HOME &rarr;</Link>
+            <Link variant={'button'} href="/works">VIEW WORKS</Link>
+        </div>
+
+        <div class="w-full max-w-2xl mt-8">
+            <ContainerBottom />
+        </div>
+    </Container>
+</Layout>

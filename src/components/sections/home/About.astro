@@ -1,0 +1,65 @@
+---
+// components
+import Heading from "../../elements/Heading.astro";
+import Text from "../../elements/Text.astro";
+import Container from "../../elements/Container.astro";
+import Link from "../../elements/Link.astro";
+import ImageContainer from "../../elements/ImageContainer.astro";
+
+// assets
+import harishPhoto from "../../../assets/images/harish_portrait.jpg";
+---
+
+<Container variant={'xl'}>
+    <div class="text-center mb-6">
+        <span class="font-mono text-12 text-base-600 uppercase tracking-widest block mb-2">INDEX_CODE: 03_PROFILE // HARISH RAJA R</span>
+        <Heading tagName="h2" tagSize="h2" class="text-center">ABOUT ME</Heading>
+    </div>
+    <div class="flex lg:flex-row lg:gap-16 gap-10 flex-col items-center">
+        <div class="flex flex-col items-start gap-6 lg:pt-2 text-base-900 lg:flex-1">
+            <div class="inline-block border border-base-900/40 bg-base-200/40 px-3 py-1 font-mono text-12 text-base-900">
+                COIMBATORE INSTITUTE OF TECHNOLOGY &bull; M.SC. AI &amp; ML
+            </div>
+            
+            <p class="font-mono text-18 md:text-20 text-base-900 font-semibold leading-relaxed">
+                I am an Integrated M.Sc. Artificial Intelligence &amp; Machine Learning student at Coimbatore Institute of Technology focused on AI/ML, full-stack engineering, and cybersecurity.
+            </p>
+
+            <Text variant={'sm'} class="text-base-800">
+                With a stellar academic track record (CGPA 9.32) and hands-on engineering experience, I specialize in architecting graph neural networks, multimodal deepfake detection engines, and full-stack cybersecurity intelligence systems that deliver quantifiable, real-world impact.
+            </Text>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full border-y border-base-900/20 py-4 font-mono text-12 text-base-700">
+                <div class="flex items-center gap-2">
+                    <span class="w-1.5 h-1.5 bg-base-900"></span>
+                    <span>Technical Lead &mdash; Student Developers Cell</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="w-1.5 h-1.5 bg-base-900"></span>
+                    <span>Joint Secretary &mdash; Photography Club</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="w-1.5 h-1.5 bg-base-900"></span>
+                    <span>Cinematographer / Head &mdash; Film Club</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="w-1.5 h-1.5 bg-base-900"></span>
+                    <span>Graduation Horizon: 2029 (CIT)</span>
+                </div>
+            </div>
+
+            <div class="flex flex-wrap gap-4 pt-2">
+                <Link variant={'button'} href="/about">MORE ABOUT ME</Link>
+                <Link variant={'button'} href="/contact" class="bg-base-900 text-base-100 hover:bg-transparent hover:text-base-900">LET'S CONNECT</Link>
+            </div>
+        </div>
+
+        <div class="w-full lg:max-w-md h-auto lg:flex-1">
+            <ImageContainer src={harishPhoto} alt="Harish Raja R — AI/ML Engineer & Full-Stack Developer" />
+            <div class="flex justify-between font-mono text-11 text-base-600 mt-2">
+                <span>IDENTITY: HARISH RAJA R</span>
+                <span>CAMPUS: CIT COIMBATORE</span>
+            </div>
+        </div>
+    </div>
+</Container>

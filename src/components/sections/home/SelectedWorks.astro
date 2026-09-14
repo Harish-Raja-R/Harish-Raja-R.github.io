@@ -1,0 +1,55 @@
+---
+// components
+import Container from "../../elements/Container.astro";
+import Heading from "../../elements/Heading.astro";
+import Work from "../../elements/Work.astro";
+import Link from "../../elements/Link.astro";
+
+// content collections
+import { getCollection } from "astro:content";
+const works = await getCollection("works");
+// Display featured works or all 6 projects
+const featuredWorks = works.filter(work => !work.data.isDraft);
+---
+
+<Container variant={'xl'} class="items-center">
+    <!-- Header -->
+    <div class="text-center flex flex-col items-center gap-3 mb-6">
+        <div class="inline-flex items-center gap-2 border border-base-900/30 px-3 py-1 font-mono text-12 text-base-600 uppercase bg-base-900/5">
+            <span>INDEX_CODE: 02_ENGINEERING_REPORTS</span>
+            <span>&bull;</span>
+            <span>6 ACTIVE SYSTEMS</span>
+        </div>
+        <Heading tagName="h2" tagSize="h2" class="text-center tracking-tight">
+            FEATURED WORKS
+        </Heading>
+        <p class="font-mono text-16 text-base-700 max-w-xl text-center">
+            Specialized projects across Graph ML, Computer Vision Super-Resolution, Multimodal Forensics, and Enterprise Threat Intelligence.
+        </p>
+    </div>
+
+    <!-- Works Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
+        {featuredWorks.map((work) => (
+            <Work 
+                slug={work.data.slug}
+                featuredImage={work.data.featuredImage}
+                title={work.data.title}
+                subtitle={work.data.subtitle}
+                client={work.data.client}
+                category={work.data.category}
+                technologies={work.data.technologies}
+                metrics={work.data.metrics}
+                githubUrl={work.data.githubUrl}
+                liveSite={work.data.liveSite}
+                description={work.data.description}
+            />
+        ))}
+    </div>
+
+    <div class="mt-8 flex justify-center">
+        <Link variant={'button'} href="/works">
+            EXPLORE ALL PROJECTS & ARCHITECTURE &rarr;
+        </Link>
+    </div>
+</Container>

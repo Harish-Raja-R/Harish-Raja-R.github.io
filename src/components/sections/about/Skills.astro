@@ -1,0 +1,64 @@
+---
+// components
+import Container from "../../elements/Container.astro";
+import Heading from "../../elements/Heading.astro";
+import ContainerBottom from "../../elements/ContainerBottom.astro";
+
+const skillCategories = [
+    {
+        category: "LANGUAGES & CORE",
+        skills: ["Python", "TypeScript", "JavaScript", "SQL", "C / C++"]
+    },
+    {
+        category: "AI, ML & DEEP LEARNING",
+        skills: [
+            "PyTorch", "Scikit-learn", "XGBoost", "LightGBM", 
+            "BERT", "ResNet-18", "NAFNet-SR", "SHAP", 
+            "NetworkX", "CUDA", "TensorBoard"
+        ]
+    },
+    {
+        category: "FULL-STACK & BACKEND APIS",
+        skills: [
+            "React", "Node.js", "Express.js", "FastAPI", 
+            "Flask", "Tailwind CSS", "Streamlit", "Gradio"
+        ]
+    },
+    {
+        category: "DATABASES, CLOUD & DEVOPS",
+        skills: [
+            "MongoDB", "MySQL", "Firebase", "Docker", 
+            "AWS", "Git", "GitHub"
+        ]
+    }
+];
+---
+
+<Container variant={'xl'} id="skills" class="scroll-mt-32">
+    <div class="text-center mb-8">
+        <span class="font-mono text-12 text-base-600 uppercase tracking-widest block mb-2">SYSTEM_CAPABILITIES // MATRIX EVALUATION</span>
+        <Heading tagName="h2" tagSize="h2" class="text-center">SKILLS MATRIX</Heading>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
+        {skillCategories.map((group, idx) => (
+            <div class="border-2 border-base-900 bg-base-100/50 p-6 flex flex-col gap-4">
+                <div class="flex justify-between items-center border-b border-base-900/30 pb-2">
+                    <span class="font-mono text-12 text-base-500">0{idx + 1} // DOMAIN</span>
+                    <span class="font-mono text-14 font-bold text-base-900 uppercase tracking-wider">{group.category}</span>
+                </div>
+                <div class="flex flex-wrap gap-2 pt-2">
+                    {group.skills.map((skill) => (
+                        <span class="font-mono text-13 text-base-900 bg-base-200/60 border border-base-900/30 px-3 py-1.5 hover:bg-base-900 hover:text-base-100 transition-colors">
+                            {skill}
+                        </span>
+                    ))}
+                </div>
+            </div>
+        ))}
+    </div>
+
+    <div class="w-full mt-6">
+        <ContainerBottom />
+    </div>
+</Container>

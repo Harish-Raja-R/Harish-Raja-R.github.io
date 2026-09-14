@@ -1,0 +1,76 @@
+---
+// components
+import Container from "../../elements/Container.astro";
+import Heading from "../../elements/Heading.astro";
+import Text from "../../elements/Text.astro";
+import ImageContainer from "../../elements/ImageContainer.astro";
+import Link from "../../elements/Link.astro";
+
+// assets
+import harishPhoto from "../../../assets/images/harish_portrait.jpg";
+---
+
+<Container variant={'xl'} class="pt-6 md:pt-10">
+    <div class="text-center mb-6">
+        <span class="font-mono text-12 text-base-600 uppercase tracking-widest block mb-2">INDEX_CODE: 03_ABOUT // ENGINEER PROFILE</span>
+        <Heading tagName="h1" tagSize="h1" class="text-center tracking-tight">HARISH RAJA R</Heading>
+    </div>
+
+    <div class="flex md:flex-row flex-col gap-12 md:items-center">
+        <div class="flex-1 flex flex-col gap-6">
+            <div class="inline-block border-2 border-base-900 bg-base-900/10 px-4 py-1.5 font-mono text-14 text-base-900 uppercase font-bold w-fit">
+                COIMBATORE INSTITUTE OF TECHNOLOGY &bull; M.SC. AI &amp; ML
+            </div>
+
+            <Text variant={'xl'} class="text-base-900 leading-snug">
+                I am an Integrated M.Sc. Artificial Intelligence &amp; Machine Learning student at Coimbatore Institute of Technology focused on AI/ML, full-stack engineering and cybersecurity.
+            </Text>
+
+            <Text variant={'sm'} class="text-base-800 leading-relaxed">
+                Operating at the confluence of mathematical rigor and high-performance software engineering, my work spans graph representation learning, silicon wafer super-resolution, multimodal disinformation forensics, and enterprise vulnerability intelligence platforms.
+            </Text>
+
+            <Text variant={'sm'} class="text-base-800 leading-relaxed">
+                I believe that impactful artificial intelligence requires more than high benchmark percentages; it demands interpretable modeling, bulletproof type contracts, low-latency deployment, and intuitive user experiences.
+            </Text>
+
+            <!-- Quick Badges -->
+            <div class="grid grid-cols-2 gap-4 border-t border-base-900/20 pt-4 font-mono text-12 text-base-700">
+                <div>
+                    <span class="text-base-500 block">CURRENT CGPA</span>
+                    <span class="text-20 font-bold text-base-900">9.32 / 10.0</span>
+                </div>
+                <div>
+                    <span class="text-base-500 block">LOCATION</span>
+                    <span class="text-16 font-bold text-base-900">Coimbatore, India</span>
+                </div>
+            </div>
+
+            <!-- Action buttons -->
+            <div class="flex flex-wrap gap-4 pt-2">
+                <a 
+                    href="#skills" 
+                    class="font-grunge text-24 px-6 py-2 border-2 border-base-900 hover:bg-base-900 hover:text-base-100 text-base-900 uppercase tracking-wide transition-colors"
+                >
+                    VIEW SKILLS MATRIX
+                </a>
+                <a 
+                    href="/Harish_Raja_R_Resume.pdf" 
+                    download="Harish_Raja_R_Resume.pdf"
+                    class="font-grunge text-24 px-6 py-2 border-2 border-base-900 bg-base-900 text-base-100 hover:bg-transparent hover:text-base-900 uppercase tracking-wide transition-colors flex items-center gap-2"
+                >
+                    <span>DOWNLOAD RESUME</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                </a>
+            </div>
+        </div>
+
+        <div class="flex-1 md:max-w-md w-full">
+            <ImageContainer src={harishPhoto} alt="Harish Raja R — Integrated M.Sc. AI & ML at CIT"/>
+            <div class="flex justify-between font-mono text-11 text-base-600 mt-2">
+                <span>PORTRAIT // COIMBATORE, INDIA</span>
+                <span>HARISH RAJA R</span>
+            </div>
+        </div>
+    </div>
+</Container>
