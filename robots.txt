@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://harish-raja-r.github.io/sitemap-index.xml
